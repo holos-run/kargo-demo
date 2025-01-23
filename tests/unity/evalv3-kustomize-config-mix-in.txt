@@ -19,7 +19,6 @@ spec:
           output: argocd-crds.2.13.2.yaml
           file:
             source: argocd-crds.2.13.2.yaml
-      validators: []
       transformers:
         - kind: Kustomize
           inputs:
@@ -28,6 +27,8 @@ spec:
           output: components/no-name/no-name.gen.yaml
           kustomize:
             kustomization:
+              apiVersion: kustomize.config.k8s.io/v1beta1
+              kind: Kustomization
               labels:
                 - includeSelectors: false
                   pairs:
@@ -35,8 +36,7 @@ spec:
               resources:
                 - resources.gen.yaml
                 - argocd-crds.2.13.2.yaml
-              kind: Kustomization
-              apiVersion: kustomize.config.k8s.io/v1beta1
+      validators: []
     - artifact: gitops/no-name.application.gen.yaml
       generators:
         - kind: Resources
