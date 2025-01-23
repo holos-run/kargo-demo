@@ -19,6 +19,7 @@ metadata:
 spec:
   artifacts:
     - artifact: components/httproutes/httproutes.gen.yaml
+      validators: []
       generators:
         - kind: Resources
           output: resources.gen.yaml
@@ -27,9 +28,18 @@ spec:
               argocd:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: argocd
+                  namespace: istio-ingress
+                  labels:
+                    app: argocd
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - argocd.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: argocd-server
@@ -39,21 +49,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: argocd
-                  namespace: istio-ingress
-                  labels:
-                    app: argocd
-                    argocd.argoproj.io/instance: network-httproutes
               kargo:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: kargo
+                  namespace: istio-ingress
+                  labels:
+                    app: kargo
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - kargo.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: kargo-api
@@ -63,21 +73,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: kargo
-                  namespace: istio-ingress
-                  labels:
-                    app: kargo
-                    argocd.argoproj.io/instance: network-httproutes
               dev-httpbin:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: dev-httpbin
+                  namespace: istio-ingress
+                  labels:
+                    app: dev-httpbin
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - dev-httpbin.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: httpbin
@@ -87,21 +97,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: dev-httpbin
-                  namespace: istio-ingress
-                  labels:
-                    app: dev-httpbin
-                    argocd.argoproj.io/instance: network-httproutes
               test-httpbin:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: test-httpbin
+                  namespace: istio-ingress
+                  labels:
+                    app: test-httpbin
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - test-httpbin.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: httpbin
@@ -111,21 +121,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: test-httpbin
-                  namespace: istio-ingress
-                  labels:
-                    app: test-httpbin
-                    argocd.argoproj.io/instance: network-httproutes
               uat-httpbin:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: uat-httpbin
+                  namespace: istio-ingress
+                  labels:
+                    app: uat-httpbin
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - uat-httpbin.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: httpbin
@@ -135,21 +145,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: uat-httpbin
-                  namespace: istio-ingress
-                  labels:
-                    app: uat-httpbin
-                    argocd.argoproj.io/instance: network-httproutes
               httpbin:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: httpbin
+                  namespace: istio-ingress
+                  labels:
+                    app: httpbin
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - httpbin.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: httpbin
@@ -165,21 +175,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: httpbin
-                  namespace: istio-ingress
-                  labels:
-                    app: httpbin
-                    argocd.argoproj.io/instance: network-httproutes
               dev-podinfo:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: dev-podinfo
+                  namespace: istio-ingress
+                  labels:
+                    app: dev-podinfo
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - dev-podinfo.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: podinfo
@@ -189,21 +199,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: dev-podinfo
-                  namespace: istio-ingress
-                  labels:
-                    app: dev-podinfo
-                    argocd.argoproj.io/instance: network-httproutes
               test-podinfo:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: test-podinfo
+                  namespace: istio-ingress
+                  labels:
+                    app: test-podinfo
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - test-podinfo.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: podinfo
@@ -213,21 +223,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: test-podinfo
-                  namespace: istio-ingress
-                  labels:
-                    app: test-podinfo
-                    argocd.argoproj.io/instance: network-httproutes
               uat-podinfo:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: uat-podinfo
+                  namespace: istio-ingress
+                  labels:
+                    app: uat-podinfo
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - uat-podinfo.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: podinfo
@@ -237,51 +247,51 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: uat-podinfo
-                  namespace: istio-ingress
-                  labels:
-                    app: uat-podinfo
-                    argocd.argoproj.io/instance: network-httproutes
               podinfo:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
-                spec:
-                  hostnames:
-                    - podinfo.holos.localhost
-                  rules:
-                    - backendRefs:
-                        - name: podinfo
-                          namespace: prod-us-east-podinfo
-                          port: 9898
-                        - name: podinfo
-                          namespace: prod-us-central-podinfo
-                          port: 9898
-                        - name: podinfo
-                          namespace: prod-us-west-podinfo
-                          port: 9898
-                      matches:
-                        - path:
-                            type: PathPrefix
-                            value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
                 metadata:
                   name: podinfo
                   namespace: istio-ingress
                   labels:
                     app: podinfo
                     argocd.argoproj.io/instance: network-httproutes
+                spec:
+                  hostnames:
+                    - podinfo.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
+                  rules:
+                    - backendRefs:
+                        - name: podinfo
+                          namespace: prod-us-east-podinfo
+                          port: 9898
+                        - name: podinfo
+                          namespace: prod-us-central-podinfo
+                          port: 9898
+                        - name: podinfo
+                          namespace: prod-us-west-podinfo
+                          port: 9898
+                      matches:
+                        - path:
+                            type: PathPrefix
+                            value: /
               prod-us-east-podinfo:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: prod-us-east-podinfo
+                  namespace: istio-ingress
+                  labels:
+                    app: prod-us-east-podinfo
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - prod-us-east-podinfo.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: podinfo
@@ -291,21 +301,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: prod-us-east-podinfo
-                  namespace: istio-ingress
-                  labels:
-                    app: prod-us-east-podinfo
-                    argocd.argoproj.io/instance: network-httproutes
               prod-us-central-podinfo:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: prod-us-central-podinfo
+                  namespace: istio-ingress
+                  labels:
+                    app: prod-us-central-podinfo
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - prod-us-central-podinfo.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: podinfo
@@ -315,21 +325,21 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: prod-us-central-podinfo
-                  namespace: istio-ingress
-                  labels:
-                    app: prod-us-central-podinfo
-                    argocd.argoproj.io/instance: network-httproutes
               prod-us-west-podinfo:
                 apiVersion: gateway.networking.k8s.io/v1
                 kind: HTTPRoute
+                metadata:
+                  name: prod-us-west-podinfo
+                  namespace: istio-ingress
+                  labels:
+                    app: prod-us-west-podinfo
+                    argocd.argoproj.io/instance: network-httproutes
                 spec:
                   hostnames:
                     - prod-us-west-podinfo.holos.localhost
+                  parentRefs:
+                    - name: default
+                      namespace: istio-ingress
                   rules:
                     - backendRefs:
                         - name: podinfo
@@ -339,16 +349,6 @@ spec:
                         - path:
                             type: PathPrefix
                             value: /
-                  parentRefs:
-                    - name: default
-                      namespace: istio-ingress
-                metadata:
-                  name: prod-us-west-podinfo
-                  namespace: istio-ingress
-                  labels:
-                    app: prod-us-west-podinfo
-                    argocd.argoproj.io/instance: network-httproutes
-      validators: []
       transformers:
         - kind: Kustomize
           inputs:
@@ -356,14 +356,14 @@ spec:
           output: components/httproutes/httproutes.gen.yaml
           kustomize:
             kustomization:
+              apiVersion: kustomize.config.k8s.io/v1beta1
+              kind: Kustomization
               labels:
                 - includeSelectors: false
                   pairs:
                     argocd.argoproj.io/instance: network-httproutes
               resources:
                 - resources.gen.yaml
-              kind: Kustomization
-              apiVersion: kustomize.config.k8s.io/v1beta1
     - artifact: gitops/httproutes.application.gen.yaml
       generators:
         - kind: Resources
