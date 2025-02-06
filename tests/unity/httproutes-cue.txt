@@ -19,7 +19,6 @@ metadata:
 spec:
   artifacts:
     - artifact: components/httproutes/httproutes.gen.yaml
-      validators: []
       generators:
         - kind: Resources
           output: resources.gen.yaml
@@ -364,6 +363,7 @@ spec:
                     argocd.argoproj.io/instance: network-httproutes
               resources:
                 - resources.gen.yaml
+      validators: []
     - artifact: gitops/httproutes.application.gen.yaml
       generators:
         - kind: Resources
