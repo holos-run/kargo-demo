@@ -3,7 +3,7 @@ module github.com/holos-run/kargo-demo
 go 1.23.3
 
 require (
-	cuelang.org/go v0.12.0-alpha.2.0.20250123112701-17c5d0bb4c26
+	cuelang.org/go v0.12.0
 	github.com/holos-run/holos v0.102.1
 	github.com/rogpeppe/go-internal v1.13.2-0.20241226121412-a5dc8ff20d0a
 )
