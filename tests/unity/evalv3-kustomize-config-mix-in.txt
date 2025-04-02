@@ -1,8 +1,7 @@
-# spec.artifacts.0.generators.1.file missing with evalv3=1 (fails, should pass)
-env CUE_EXPERIMENT=embed,evalv3=1
+# spec.artifacts.0.generators.1.file was missing with evalv3 but present with
+# evalv2 passes as of v0.12.0 and later, remains here for regression testing
 exec cue export --out yaml -e holos --inject stack=argocd ../../stacks/argocd/components/argocd-crds
 cmp stdout $WORK/golden.yaml
-
 -- golden.yaml --
 kind: BuildPlan
 apiVersion: v1alpha5

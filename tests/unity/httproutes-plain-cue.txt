@@ -1,14 +1,7 @@
-# Works with evalv3=0
-env CUE_EXPERIMENT=embed,evalv3=0
+# I expected this test case to trigger the 4 minute bug we saw in commit c6a1b24
+# but it does not with cue 0.11.1 and later versions keep the test for
+# regression testing.
 exec cue vet -c .
-
-# Works with evalv3=1
-env CUE_EXPERIMENT=embed,evalv3=1
-exec cue vet -c .
-
-# I expected this test case to trigger the 4 minute bug we saw in commit
-# c6a1b24 but it does not with cue 0.11.1
-
 -- httproutes.cue --
 package p
 
