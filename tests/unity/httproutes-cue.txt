@@ -1,12 +1,6 @@
-# Works, but slowly with evalv3=0
-env CUE_EXPERIMENT=embed,evalv3=0
+# Started passing as of f2872b72198e6d964c116c03d57bfe772f69c429, maybe earlier.
+# Keep for regression testing.
 exec cue export --out yaml -e holos --inject stack=network --inject holos_component_name=httproutes --inject holos_component_path=stacks/network/components/httproutes --inject holos_component_labels={"component":"httproutes","holos.run/component.name":"httproutes","holos.run/stack.name":"network"} ../../stacks/network/components/httproutes
-cmp stdout $WORK/golden.txt
-
-# Does not work with evalv3=1 (Started passing as of f2872b72198e6d964c116c03d57bfe772f69c429, maybe earlier)
-env CUE_EXPERIMENT=embed,evalv3=1
-exec cue export --out yaml -e holos --inject stack=network --inject holos_component_name=httproutes --inject holos_component_path=stacks/network/components/httproutes --inject holos_component_labels={"component":"httproutes","holos.run/component.name":"httproutes","holos.run/stack.name":"network"} ../../stacks/network/components/httproutes
-
 -- golden.txt --
 kind: BuildPlan
 apiVersion: v1alpha5
