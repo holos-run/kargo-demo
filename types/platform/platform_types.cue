@@ -109,7 +109,9 @@ import (
 // api resources are located.  For example, HTTPRoute resources.  This is
 // usually the namespace containing the default Gateway resource per the v1
 // Gateway API.
-#GatewayNamespace: string | *"istio-ingress"
+#GatewayNamespace: "istio-ingress"
+// TODO(jeff): uncomment once https://github.com/cue-lang/cue/issues/3905 is resolved.
+// #GatewayNamespace: string | *"istio-ingress"
 
 // #HTTPRoutes represents a collection of HTTPRoute resources.
 #HTTPRoutes: [NAME=#Name]: #HTTPRoute & {
